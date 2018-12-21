@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">高精度打卡定位</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="Positioning">定位中...</string>
+    <string name="bt_punch">上传位置</string>
+    <string name="tv_punch_m">上传位置成功!定位类型：高精度定位</string>
+    <string name="tv_punch_g">上传位置!定位类型：普通精度定位</string>
+    <string name="tv_punch_error">上传位置!定位类型：普通精度定位</string>
+</resources>

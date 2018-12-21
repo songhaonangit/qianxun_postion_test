@@ -1,0 +1,14 @@
+Executable : /main/tools/Android/Sdk/cmake/3.6.4111459/bin/cmake
+arguments : 
+-H/root/Downloads/qianxun_postion_test/app
+-B/root/Downloads/qianxun_postion_test/app/.externalNativeBuild/cmake/debug/armeabi-v7a
+-DANDROID_ABI=armeabi-v7a
+-DANDROID_PLATFORM=android-16
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/root/Downloads/qianxun_postion_test/app/build/intermediates/cmake/debug/obj/armeabi-v7a
+-DCMAKE_BUILD_TYPE=Debug
+-DANDROID_NDK=/main/tools/Android/Sdk/ndk-bundle
+-DCMAKE_TOOLCHAIN_FILE=/main/tools/Android/Sdk/ndk-bundle/build/cmake/android.toolchain.cmake
+-DCMAKE_MAKE_PROGRAM=/main/tools/Android/Sdk/cmake/3.6.4111459/bin/ninja
+-GAndroid Gradle - Ninja
+jvmArgs : 
+

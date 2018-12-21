@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.getcharmsmart.hn.postion.MainActivity">
+
+
+
+        <RelativeLayout
+            android:id="@+id/posting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="41dp"
+            android:gravity="center">
+
+            <com.bcgtgjyb.huanwen.customview.mylibrary.view58.Loding58View
+                android:id="@+id/add"
+                android:layout_width="100dp"
+                android:layout_height="140dp"
+                android:visibility="visible">
+
+            </com.bcgtgjyb.huanwen.customview.mylibrary.view58.Loding58View>
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/add"
+                android:layout_alignRight="@+id/add"
+                android:layout_below="@+id/add"
+                android:layout_marginEnd="14dp"
+                android:layout_marginRight="14dp"
+                android:text="@string/Positioning"
+                android:textColor="@android:color/holo_blue_light" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/bt"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/posting"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="46dp"
+            android:background="@drawable/round_button"
+            android:gravity="center"
+            android:text="@string/bt_punch"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/activity_vertical_margin" />
+    <ScrollView
+        android:layout_below="@+id/bt"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_result"
+
+                android:gravity="left"
+                android:text=""
+                android:textSize="10sp"
+                android:fadeScrollbars="false"
+                android:scrollbars="vertical"
+                android:textColor="@android:color/black"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+    </ScrollView>
+</RelativeLayout>
