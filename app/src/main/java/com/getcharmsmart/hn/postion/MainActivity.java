@@ -24,7 +24,9 @@ import android.widget.Toast;
 import com.bcgtgjyb.huanwen.customview.mylibrary.view58.Loding58View;
 import com.getcharmsmart.hn.utils.FileUtils;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     Button button;
     Loding58View  loding58View;
     TextView result,tv;
-    List<String> list = new ArrayList<>();
+
     StringBuilder stringBuilder;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
@@ -63,13 +65,13 @@ public class MainActivity extends AppCompatActivity {
         tv.setVisibility(View.INVISIBLE);
         loding58View.setVisibility(View.INVISIBLE);
 
-        open();
 
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                ioctl(3,1);
+
                 ioctl(2,1);
 
                 addData();
@@ -81,8 +83,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d(TAG,"---onResume()---");
         /**
-         * 设置为横屏
+         * 设置为竖屏
          */
         if(getRequestedOrientation()!= ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -106,6 +109,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         verifyStoragePermissions(this);
+
+
+        CmdGps.openGps();
+        open();
     }
 
      /*
@@ -144,11 +151,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onStop() {
+        super.onStop();
         close();
+        CmdGps.closeGps();
+
+        Log.d(TAG,"---onStop()---");
     }
+
 
 
 
@@ -171,6 +183,12 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onTick(long millisUntilFinished) {
+
+           if(!CmdGps.checkGpsProcess()){
+               CmdGps.openGps();
+               addData();
+           }
+            Log.d(TAG, "---timer_unlock--onTick--CmdGps.checkGpsProcess()---"+CmdGps.checkGpsProcess());
             Log.d(TAG, "---timer_unlock--onTick--millisUntilFinished---"+millisUntilFinished+"ms");
         }
 
@@ -181,14 +199,14 @@ public class MainActivity extends AppCompatActivity {
             File file = new File(FILE_NAME);
             if (!file.exists() || !file.isFile()) {
 
-                result.setText("打卡失败\n"+"NEMA 数据不存在");
-                Toast.makeText(getApplicationContext(),"打卡失败",Toast.LENGTH_SHORT).show();
+                result.setText("上传位置失败\n"+"NEMA 数据不存在");
+                Toast.makeText(getApplicationContext(),"上传位置失败",Toast.LENGTH_SHORT).show();
 
             }else {
                 stringBuilder = FileUtils.readFile(FILE_NAME,"UTF_8");
 
-                result.setText("打卡成功\n"+stringBuilder.toString());
-                Toast.makeText(getApplicationContext(),"打卡成功",Toast.LENGTH_SHORT).show();
+                result.setText("上传位置成功\n"+stringBuilder.toString());
+                Toast.makeText(getApplicationContext(),"上传位置成功",Toast.LENGTH_SHORT).show();
             }
 
 
@@ -219,10 +237,16 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+
+
     public native int open();
 
     public native int close();
 
     public native int ioctl(int cmd, int flag);
+
+
+
+
 
 }
