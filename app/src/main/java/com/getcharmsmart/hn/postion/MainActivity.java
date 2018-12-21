@@ -70,9 +70,6 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                ioctl(3,1);
-
-                ioctl(2,1);
 
                 addData();
 
@@ -217,6 +214,9 @@ public class MainActivity extends AppCompatActivity {
     };
 
     public void addData(){
+
+        ioctl(2,1);
+
         tv.setVisibility(View.VISIBLE);
         loding58View.setVisibility(View.VISIBLE);
         result.setText("");
@@ -231,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == 444) {
+
             addData();
             return true;
         }
@@ -244,8 +245,6 @@ public class MainActivity extends AppCompatActivity {
     public native int close();
 
     public native int ioctl(int cmd, int flag);
-
-
 
 
 
