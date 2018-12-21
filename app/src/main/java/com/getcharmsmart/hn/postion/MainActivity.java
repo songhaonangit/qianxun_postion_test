@@ -62,8 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
         tv.setVisibility(View.INVISIBLE);
         loding58View.setVisibility(View.INVISIBLE);
-      //  tv.setMovementMethod(ScrollingMovementMethod.getInstance());
-     open();
+
+        open();
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 //                ioctl(3,1);
                 ioctl(2,1);
 
-                unLock();
+                addData();
 
             }
         });
@@ -154,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
     public static void verifyStoragePermissions(Activity activity) {
 
         try {
-            //检测是否有写的权限
+            //检测是否有读的权限
             int permission = ActivityCompat.checkSelfPermission(activity,
                     "android.permission.READ_EXTERNAL_STORAGE");
             if (permission != PackageManager.PERMISSION_GRANTED) {
@@ -177,15 +178,8 @@ public class MainActivity extends AppCompatActivity {
         public void onFinish() {
 
 
-//                list = FileUtils.readFileToList(FILE_NAME,"UTF_8");
-//
-//                Log.d("TAG",list.size()+"");
-//                if(list.size()!= 0){
-//                    result.setText(list.get(0).toString()+list.get(1).toString());
-//                }
-
             File file = new File(FILE_NAME);
-            if (file == null || !file.isFile()) {
+            if (!file.exists() || !file.isFile()) {
 
                 result.setText("打卡失败\n"+"NEMA 数据不存在");
                 Toast.makeText(getApplicationContext(),"打卡失败",Toast.LENGTH_SHORT).show();
@@ -204,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    public void unLock(){
+    public void addData(){
         tv.setVisibility(View.VISIBLE);
         loding58View.setVisibility(View.VISIBLE);
         result.setText("");
@@ -219,10 +213,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == 444) {
-            Log.i(TAG, "---onKeyDown--keycode-------" + keyCode);
-            unLock();
-
-
+            addData();
             return true;
         }
         return false;
